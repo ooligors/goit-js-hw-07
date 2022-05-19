@@ -21,6 +21,7 @@ function createGalleryMarkUp(galleryItems) {
     }).join('');
 }
 
+let modalInstanse;
 
 galleryEl.addEventListener("click", cb);
 function cb(e) {
@@ -29,11 +30,21 @@ function cb(e) {
     console.log(e.currentTarget);
     const dataOrigin = e.target.dataset.source;
     console.log(dataOrigin);
-
-    basicLightbox.create(`
+    modalInstanse = basicLightbox.create(`
 		<img width="1400" height="900" src="${dataOrigin}">
-	`).show()
+	`);
+    modalInstanse.show()
+
 }
+
+
+document.addEventListener('keydown', function (event) {
+    const key = event.key; // const {key} = event; in ES6+
+    if (key === "Escape" && modalInstanse.visible()) {
+        modalInstanse.close();
+    }
+});
+
 
 
 
