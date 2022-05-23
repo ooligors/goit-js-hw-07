@@ -23,7 +23,9 @@ function createGalleryMarkUp(galleryItems) {
 
 let modalInstanse;
 
-galleryEl.addEventListener("click", cb);
+const galleryItem = document.querySelector(".gallery__item");
+
+galleryItem.addEventListener("click", cb);
 function cb(e) {
     e.preventDefault();
     console.log(e.target);
@@ -33,17 +35,27 @@ function cb(e) {
     modalInstanse = basicLightbox.create(`
 		<img width="1400" height="900" src="${dataOrigin}">
 	`);
-    modalInstanse.show()
+    modalInstanse.show();
+
+    document.addEventListener('keydown', onEscPress);
 
 }
 
+debugger;
 
-document.addEventListener('keydown', function (event) {
+const onEscPress = function (event) {
     const key = event.key; // const {key} = event; in ES6+
-    if (key === "Escape" && modalInstanse.visible()) {
+    if (key === "Escape") {
         modalInstanse.close();
+        document.removeEventListener('keydown', onEscPress);
+
     }
-});
+
+};
+
+
+
+
 
 
 
