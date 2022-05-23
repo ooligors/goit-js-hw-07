@@ -23,15 +23,17 @@ function createGalleryMarkUp(galleryItems) {
 
 let modalInstanse;
 
-const galleryItem = document.querySelector(".gallery__item");
+// const galleryItem = document.querySelector(".gallery__item");
 
-galleryItem.addEventListener("click", cb);
+galleryEl.addEventListener("click", cb);
 function cb(e) {
     e.preventDefault();
     console.log(e.target);
-    console.log(e.currentTarget);
     const dataOrigin = e.target.dataset.source;
     console.log(dataOrigin);
+
+    if (dataOrigin === undefined) { return };
+
     modalInstanse = basicLightbox.create(`
 		<img width="1400" height="900" src="${dataOrigin}">
 	`);
@@ -48,9 +50,7 @@ const onEscPress = function (event) {
     if (key === "Escape") {
         modalInstanse.close();
         document.removeEventListener('keydown', onEscPress);
-
     }
-
 };
 
 
